@@ -8,7 +8,7 @@ install:
 	R CMD INSTALL --install-tests mfdb
 
 test: install
-	R -f Rpackages/mfdb/tests/test-all.R
+	echo "library(testthat); test_package('mfdb')" | R
 
 # Individual R files require no comilation
 R/*.R: 
