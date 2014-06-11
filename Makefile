@@ -18,6 +18,9 @@ install:
 test: install
 	echo "library(testthat); library(mfdb); test_package('mfdb')" | $(R)
 
+shell: install
+	R_DEVPKG=mfdb R_LIBS=$(shell pwd)/Rpackages R --no-save --no-environ
+
 # Individual R files require no comilation
 R/*.R: 
 
