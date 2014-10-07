@@ -9,7 +9,8 @@ PGSOCKET = /tmp/pg_mfdb
 all: dependencies check install
 
 mfdb/:
-	git clone git@github.com:mareframe/mfdb.git
+	[ ! -d mfdb/.git ] && { git clone git://github.com/mareframe/mfdb.git ; cd mfdb && git remote set-url --push origin git@github.com:mareframe/mfdb.git; } || true
+	cd mfdb && git pull
 
 $(PGDATA):
 	$(PGDIR)/initdb -D $(PGDATA)
