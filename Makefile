@@ -1,6 +1,7 @@
 R = R_LIBS=$(shell pwd)/Rpackages R --vanilla
 CRAN_REPOS = c("http://cran.uk.r-project.org")
 
+all: dependencies check install
 
 mfdb/:
 	git clone git@github.com:mareframe/mfdb.git
@@ -9,6 +10,7 @@ mfdb/:
 # dependencies manually
 dependencies: mfdb/
 	echo 'install.packages(Filter(nzchar, unlist(strsplit(read.dcf("mfdb/DESCRIPTION")[,"Imports"], "\\\\W+"))), dependencies = TRUE, repos = $(CRAN_REPOS))' | $(R)
+	echo 'install.packages(Filter(nzchar, unlist(strsplit(read.dcf("mfdb/DESCRIPTION")[,"Suggests"], "\\\\W+"))), dependencies = TRUE, repos = $(CRAN_REPOS))' | $(R)
 
 mfdb_1.0.tar.gz: R/*.R tests/*.R tests/testthat/*.R
 	$(R) CMD build mfdb
