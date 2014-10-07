@@ -1,7 +1,7 @@
 R = R_LIBS=$(shell pwd)/Rpackages R --vanilla
 CRAN_REPOS = c("http://cran.uk.r-project.org")
 
-PGDIR = $(shell dirname `ls -1 /bin/initdb /usr/lib/postgresql/9.3/bin/initdb 2>/dev/null | head -1`)
+PGDIR = $(shell dirname `ls -1 /usr/lib/postgresql/9.*/bin/initdb /bin/initdb 2>/dev/null | head -1`)
 PGDATA = pgdata
 PGNAME = mf
 PGSOCKET = /tmp/pg_mfdb
