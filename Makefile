@@ -31,8 +31,8 @@ db_shell:
 # One can't install one thing locally and another from repo, so install
 # dependencies manually
 dependencies: mfdb/
-	echo 'install.packages(Filter(nzchar, unlist(strsplit(read.dcf("mfdb/DESCRIPTION")[,"Imports"], "\\\\W+"))), dependencies = TRUE, repos = $(CRAN_REPOS))' | $(R)
-	echo 'install.packages(Filter(nzchar, unlist(strsplit(read.dcf("mfdb/DESCRIPTION")[,"Suggests"], "\\\\W+"))), dependencies = TRUE, repos = $(CRAN_REPOS))' | $(R)
+	/bin/echo -E 'install.packages(Filter(nzchar, unlist(strsplit(read.dcf("mfdb/DESCRIPTION")[,"Imports"], "\\W+"))), dependencies = TRUE, repos = $(CRAN_REPOS))' | $(R)
+	/bin/echo -E 'install.packages(Filter(nzchar, unlist(strsplit(read.dcf("mfdb/DESCRIPTION")[,"Suggests"], "\\W+"))), dependencies = TRUE, repos = $(CRAN_REPOS))' | $(R)
 
 mfdb_1.0.tar.gz: R/*.R tests/*.R tests/testthat/*.R
 	$(R) CMD build mfdb
