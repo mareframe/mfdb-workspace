@@ -44,7 +44,7 @@ install:
 	$(R) CMD INSTALL --install-tests --html --example mfdb
 
 test: install
-	echo "library(testthat); library(mfdb); test_package('mfdb')" | $(R)
+	/bin/echo -E "for (f in list.files('mfdb/tests', full.names = TRUE)) source(f, chdir = TRUE)" | $(R) --slave
 
 shell: install
 	R_DEVPKG=mfdb R_LIBS=$(shell pwd)/Rpackages R --no-save --no-environ
@@ -56,4 +56,4 @@ tests/*.R:
 
 tests/testthat/*.R:
 
-.PHONY: dependencies check install test
+.PHONY: dependencies check install test db_start db_create db_shell
