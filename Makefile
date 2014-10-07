@@ -4,7 +4,8 @@ CRAN_REPOS = c("http://cran.uk.r-project.org")
 all: dependencies check install
 
 mfdb/:
-	git clone git@github.com:mareframe/mfdb.git
+	[ ! -d mfdb/.git ] && { git clone git://github.com/mareframe/mfdb.git ; cd mfdb && git remote set-url --push origin git@github.com:mareframe/mfdb.git; } || true
+	cd mfdb && git pull
 
 # One can't install one thing locally and another from repo, so install
 # dependencies manually
