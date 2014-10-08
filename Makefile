@@ -34,11 +34,9 @@ dependencies: mfdb/
 	/bin/echo -E 'install.packages(Filter(nzchar, unlist(strsplit(read.dcf("mfdb/DESCRIPTION")[,"Imports"], "\\W+"))), dependencies = TRUE, repos = $(CRAN_REPOS))' | $(R)
 	/bin/echo -E 'install.packages(Filter(nzchar, unlist(strsplit(read.dcf("mfdb/DESCRIPTION")[,"Suggests"], "\\W+"))), dependencies = TRUE, repos = $(CRAN_REPOS))' | $(R)
 
-mfdb_1.0.tar.gz: R/*.R tests/*.R tests/testthat/*.R
-	$(R) CMD build mfdb
-
-check: mfdb_1.0.tar.gz
-	$(R) CMD check mfdb_1.0.tar.gz
+check: R/*.R tests/*.R
+	rm mfdb_*.tar.gz 2>/dev/null || true
+	$(R) CMD build mfdb && $(R) CMD check mfdb_*.tar.gz
 
 install:
 	$(R) CMD INSTALL --install-tests --html --example mfdb
@@ -53,7 +51,5 @@ shell: install
 R/*.R: 
 
 tests/*.R:
-
-tests/testthat/*.R:
 
 .PHONY: dependencies check install test db_start db_create db_shell
