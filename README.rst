@@ -48,3 +48,10 @@ Development
 You can run ``make test`` and ``make check`` to run unit tests and ``R CMD
 check`` on the mfdb package.
 
+Integration tests
+-----------------
+
+There are also tests you can run against the database you created with
+``db_create``, run ``make inttest`` to run these.
+
+*NB:* These will destroy any data stored in the database first.

@@ -44,6 +44,9 @@ install:
 test: install
 	/bin/echo -E "for (f in list.files('mfdb/tests', full.names = TRUE)) source(f, chdir = TRUE)" | $(R) --slave
 
+inttest: test
+	for f in */demo/inttest-*.R; do echo "=== $$f ============="; Rscript $$f || break; done
+
 shell: install
 	R_DEVPKG=mfdb R_LIBS=$(shell pwd)/Rpackages R --no-save --no-environ
 
