@@ -19,6 +19,7 @@ db_start: $(PGDATA)
 	rmdir $(PGSOCKET) || true
 	mkdir $(PGSOCKET)
 	$(PGDIR)/postmaster -D "$(PGDATA)" \
+	                    -c log_statement=all \
 	                    --unix_socket_directories="$(PGSOCKET)" \
 	                    --listen_addresses=""
 
