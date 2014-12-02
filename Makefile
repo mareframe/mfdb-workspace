@@ -13,9 +13,11 @@ mfdb/:
 	cd mfdb && git pull
 
 $(PGDATA):
+	[ -e "$(PGDIR)/initdb" ] || { "Cannot find initdb"; exit 1; }
 	$(PGDIR)/initdb -D $(PGDATA)
 
 db_start: $(PGDATA)
+	[ -e "$(PGDIR)/postmaster" ] || { "Cannot find postmaster"; exit 1; }
 	rmdir $(PGSOCKET) || true
 	mkdir $(PGSOCKET)
 	$(PGDIR)/postmaster -D "$(PGDATA)" \
@@ -24,9 +26,11 @@ db_start: $(PGDATA)
 	                    --listen_addresses=""
 
 db_create:
+	[ -e "$(PGDIR)/createdb" ] || { "Cannot find createdb"; exit 1; }
 	$(PGDIR)/createdb -h $(PGSOCKET) $(PGNAME)
 
 db_shell:
+	[ -e "$(PGDIR)/psql" ] || { "Cannot find psql"; exit 1; }
 	$(PGDIR)/psql -h $(PGSOCKET) $(PGNAME)
 
 # One can't install one thing locally and another from repo, so install
