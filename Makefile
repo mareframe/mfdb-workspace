@@ -55,6 +55,10 @@ inttest: test
 shell: install
 	R_DEVPKG=mfdb R_LIBS=$(shell pwd)/Rpackages R --no-save --no-environ
 
+documentation: install
+	cp -vr Rpackages/mfdb mareframe.github.io/packages/
+	cd mareframe.github.io && git add -A && git commit -av
+
 # Individual R files require no comilation
 R/*.R: 
 
