@@ -4,3 +4,6 @@
 /pgdata
 
 /*.tar.gz
+
+/example-*-data/
+/example-*-model/
