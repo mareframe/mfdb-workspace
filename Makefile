@@ -56,7 +56,7 @@ example-iceland example-datras: install
 	rm -r $@-model || true
 	mkdir $@-model
 	cp $@-model.baseline/timings $@-model/timings
-	echo -n $$(git --git-dir=mfdb/.git rev-parse HEAD) > $@-model/timings
+	echo -n $$(git --git-dir=mfdb/.git log --pretty=format:'%h %s %d' --abbrev-commit HEAD^..HEAD) >> $@-model/timings
 	R_LIBS=$(shell pwd)/Rpackages \
 	    time -ao$@-model/timings \
 	         --format=" %U user %S system %E elapsed %P CPU" \
