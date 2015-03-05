@@ -1,0 +1,942 @@
+
+R version 3.1.2 (2014-10-31) -- "Pumpkin Helmet"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> # To run this script, first install data sources:-
+> #  Debian / Ubuntu: apt-get install php5-cli php5-curl
+> # install.packages('DATRAS', repos = 'http://www.rforge.net/', type = 'source')
+> library(DATRAS)
+> library(mfdb)
+> library(plyr)
+> 
+> # Download data and read in available data for cod
+> if (!file.exists('example-datras-data/NS-IBTS_1995.zip')) {
++     dir.create('example-datras-data', recursive = TRUE, showWarnings = FALSE)
++     oldwd <- getwd()
++     setwd('example-datras-data')
++     downloadExchange("NS-IBTS",1995:2005)
++     setwd(oldwd)
++ }
+> d <- readExchangeDir(path = 'example-datras-data')
+Processing csv file:
+[1] "/tmp/RtmpQEus22/Exchange Data_2014-12-02 13_38_20.csv"
+Locating lines with headers
+   user  system elapsed 
+  1.168   0.000   1.168 
+Reading data files
+   user  system elapsed 
+  0.028   0.000   0.026 
+   user  system elapsed 
+  1.608   0.020   1.629 
+   user  system elapsed 
+  0.760   0.008   0.767 
+Classes of the variables
+$CA
+       RecordType            Survey           Quarter           Country 
+         "factor"          "factor"         "integer"          "factor" 
+             Ship              Gear         SweepLngt           GearExp 
+         "factor"          "factor"         "integer"         "logical" 
+         DoorType              StNo            HaulNo              Year 
+         "factor"       "character"         "integer"         "integer" 
+     SpecCodeType          SpecCode          AreaType          AreaCode 
+        "logical"         "integer"         "integer"          "factor" 
+         LngtCode          LngtClas               Sex          Maturity 
+        "integer"         "integer"          "factor"         "integer" 
+           PlusGr               Age           NoAtALK            IndWgt 
+         "factor"         "integer"         "integer"         "logical" 
+DateofCalculation       Valid_Aphia 
+        "logical"         "integer" 
+
+$HH
+       RecordType            Survey           Quarter           Country 
+         "factor"          "factor"         "integer"          "factor" 
+             Ship              Gear         SweepLngt           GearExp 
+         "factor"          "factor"         "integer"          "factor" 
+         DoorType              StNo            HaulNo              Year 
+         "factor"       "character"         "integer"         "integer" 
+            month               Day          TimeShot           Stratum 
+        "integer"         "integer"         "integer"         "logical" 
+          HaulDur          DayNight          ShootLat         ShootLong 
+        "integer"          "factor"         "numeric"         "numeric" 
+          HaulLat          HaulLong           StatRec             Depth 
+        "numeric"         "numeric"          "factor"         "integer" 
+          HaulVal         HydroStNo    StdSpecRecCode    BycSpecRecCode 
+         "factor"          "factor"         "integer"         "integer" 
+         DataType        Netopening           Rigging           Tickler 
+         "factor"         "numeric"         "logical"         "logical" 
+         Distance          Warplngt           Warpdia           WarpDen 
+        "integer"         "integer"         "integer"         "logical" 
+      DoorSurface           DoorWgt        DoorSpread        WingSpread 
+        "numeric"         "integer"         "numeric"         "numeric" 
+         Buoyancy           KiteDim     WgtGroundRope            TowDir 
+        "integer"         "numeric"         "integer"         "integer" 
+      GroundSpeed        SpeedWater         SurCurDir       SurCurSpeed 
+        "numeric"         "numeric"         "integer"         "numeric" 
+        BotCurDir       BotCurSpeed           WindDir         WindSpeed 
+        "logical"         "logical"         "integer"         "integer" 
+         SwellDir       SwellHeight           SurTemp           BotTemp 
+        "integer"         "numeric"         "logical"         "logical" 
+           SurSal            BotSal       ThermoCline      ThClineDepth 
+        "logical"         "logical"         "logical"         "logical" 
+DateofCalculation 
+        "logical" 
+
+$HL
+       RecordType            Survey           Quarter           Country 
+         "factor"          "factor"         "integer"          "factor" 
+             Ship              Gear         SweepLngt           GearExp 
+         "factor"          "factor"         "integer"          "factor" 
+         DoorType              StNo            HaulNo              Year 
+         "factor"       "character"         "integer"         "integer" 
+     SpecCodeType          SpecCode           SpecVal               Sex 
+        "logical"         "integer"         "integer"          "factor" 
+          TotalNo     CatIdentifier            NoMeas         SubFactor 
+        "numeric"         "integer"         "integer"         "numeric" 
+           SubWgt       CatCatchWgt          LngtCode         LngtClass 
+        "logical"         "integer"          "factor"         "integer" 
+       HLNoAtLngt DateofCalculation       Valid_Aphia 
+        "numeric"         "logical"         "integer" 
+
+Consistency check passed
+Processing csv file:
+[1] "/tmp/RtmpQEus22/Exchange Data_2014-12-02 13_38_50.csv"
+Locating lines with headers
+   user  system elapsed 
+  0.408   0.012   0.419 
+Reading data files
+   user  system elapsed 
+  0.024   0.000   0.022 
+   user  system elapsed 
+  0.804   0.000   0.804 
+   user  system elapsed 
+  0.636   0.004   0.642 
+Classes of the variables
+$CA
+       RecordType            Survey           Quarter           Country 
+         "factor"          "factor"         "integer"          "factor" 
+             Ship              Gear         SweepLngt           GearExp 
+         "factor"          "factor"         "integer"         "logical" 
+         DoorType              StNo            HaulNo              Year 
+         "factor"       "character"         "integer"         "integer" 
+     SpecCodeType          SpecCode          AreaType          AreaCode 
+        "logical"         "integer"         "integer"          "factor" 
+         LngtCode          LngtClas               Sex          Maturity 
+        "integer"         "integer"          "factor"         "integer" 
+           PlusGr               Age           NoAtALK            IndWgt 
+         "factor"         "integer"         "integer"         "logical" 
+DateofCalculation       Valid_Aphia 
+        "logical"         "integer" 
+
+$HH
+       RecordType            Survey           Quarter           Country 
+         "factor"          "factor"         "integer"          "factor" 
+             Ship              Gear         SweepLngt           GearExp 
+         "factor"          "factor"         "integer"          "factor" 
+         DoorType              StNo            HaulNo              Year 
+         "factor"       "character"         "integer"         "integer" 
+            month               Day          TimeShot           Stratum 
+        "integer"         "integer"         "integer"         "logical" 
+          HaulDur          DayNight          ShootLat         ShootLong 
+        "integer"          "factor"         "numeric"         "numeric" 
+          HaulLat          HaulLong           StatRec             Depth 
+        "numeric"         "numeric"          "factor"         "integer" 
+          HaulVal         HydroStNo    StdSpecRecCode    BycSpecRecCode 
+         "factor"          "factor"         "integer"         "integer" 
+         DataType        Netopening           Rigging           Tickler 
+         "factor"         "numeric"         "logical"         "logical" 
+         Distance          Warplngt           Warpdia           WarpDen 
+        "integer"         "integer"         "integer"         "logical" 
+      DoorSurface           DoorWgt        DoorSpread        WingSpread 
+        "numeric"         "integer"         "numeric"         "numeric" 
+         Buoyancy           KiteDim     WgtGroundRope            TowDir 
+        "integer"         "numeric"         "integer"         "integer" 
+      GroundSpeed        SpeedWater         SurCurDir       SurCurSpeed 
+        "numeric"         "numeric"         "integer"         "numeric" 
+        BotCurDir       BotCurSpeed           WindDir         WindSpeed 
+        "logical"         "logical"         "integer"         "integer" 
+         SwellDir       SwellHeight           SurTemp           BotTemp 
+        "integer"         "numeric"         "logical"         "logical" 
+           SurSal            BotSal       ThermoCline      ThClineDepth 
+        "logical"         "logical"         "logical"         "logical" 
+DateofCalculation 
+        "logical" 
+
+$HL
+       RecordType            Survey           Quarter           Country 
+         "factor"          "factor"         "integer"          "factor" 
+             Ship              Gear         SweepLngt           GearExp 
+         "factor"          "factor"         "integer"          "factor" 
+         DoorType              StNo            HaulNo              Year 
+         "factor"       "character"         "integer"         "integer" 
+     SpecCodeType          SpecCode           SpecVal               Sex 
+        "logical"         "integer"         "integer"          "factor" 
+          TotalNo     CatIdentifier            NoMeas         SubFactor 
+        "numeric"         "integer"         "integer"         "numeric" 
+           SubWgt       CatCatchWgt          LngtCode         LngtClass 
+        "logical"         "integer"         "integer"         "integer" 
+       HLNoAtLngt DateofCalculation       Valid_Aphia 
+        "numeric"         "logical"         "integer" 
+
+Consistency check passed
+Processing csv file:
+[1] "/tmp/RtmpQEus22/Exchange Data_2014-12-02 13_39_20.csv"
+Locating lines with headers
+   user  system elapsed 
+  0.352   0.004   0.353 
+Reading data files
+   user  system elapsed 
+  0.016   0.000   0.019 
+   user  system elapsed 
+  0.640   0.012   0.651 
+   user  system elapsed 
+  0.544   0.004   0.549 
+Classes of the variables
+$CA
+       RecordType            Survey           Quarter           Country 
+         "factor"          "factor"         "integer"          "factor" 
+             Ship              Gear         SweepLngt           GearExp 
+         "factor"          "factor"         "integer"          "factor" 
+         DoorType              StNo            HaulNo              Year 
+         "factor"       "character"         "integer"         "integer" 
+     SpecCodeType          SpecCode          AreaType          AreaCode 
+        "logical"         "integer"         "integer"          "factor" 
+         LngtCode          LngtClas               Sex          Maturity 
+        "integer"         "integer"          "factor"         "integer" 
+           PlusGr               Age           NoAtALK            IndWgt 
+         "factor"         "integer"         "integer"         "logical" 
+DateofCalculation       Valid_Aphia 
+        "integer"         "integer" 
+
+$HH
+       RecordType            Survey           Quarter           Country 
+         "factor"          "factor"         "integer"          "factor" 
+             Ship              Gear         SweepLngt           GearExp 
+         "factor"          "factor"         "integer"          "factor" 
+         DoorType              StNo            HaulNo              Year 
+         "factor"       "character"         "integer"         "integer" 
+            month               Day          TimeShot           Stratum 
+        "integer"         "integer"         "integer"         "logical" 
+          HaulDur          DayNight          ShootLat         ShootLong 
+        "integer"          "factor"         "numeric"         "numeric" 
+          HaulLat          HaulLong           StatRec             Depth 
+        "numeric"         "numeric"          "factor"         "integer" 
+          HaulVal         HydroStNo    StdSpecRecCode    BycSpecRecCode 
+         "factor"          "factor"         "integer"         "integer" 
+         DataType        Netopening           Rigging           Tickler 
+         "factor"         "numeric"         "logical"         "logical" 
+         Distance          Warplngt           Warpdia           WarpDen 
+        "integer"         "integer"         "integer"         "logical" 
+      DoorSurface           DoorWgt        DoorSpread        WingSpread 
+        "numeric"         "integer"         "numeric"         "numeric" 
+         Buoyancy           KiteDim     WgtGroundRope            TowDir 
+        "integer"         "numeric"         "integer"         "integer" 
+      GroundSpeed        SpeedWater         SurCurDir       SurCurSpeed 
+        "numeric"         "numeric"         "integer"         "numeric" 
+        BotCurDir       BotCurSpeed           WindDir         WindSpeed 
+        "logical"         "logical"         "integer"         "integer" 
+         SwellDir       SwellHeight           SurTemp           BotTemp 
+        "integer"         "numeric"         "logical"         "logical" 
+           SurSal            BotSal       ThermoCline      ThClineDepth 
+        "logical"         "logical"         "logical"         "logical" 
+DateofCalculation 
+        "integer" 
+
+$HL
+       RecordType            Survey           Quarter           Country 
+         "factor"          "factor"         "integer"          "factor" 
+             Ship              Gear         SweepLngt           GearExp 
+         "factor"          "factor"         "integer"          "factor" 
+         DoorType              StNo            HaulNo              Year 
+         "factor"       "character"         "integer"         "integer" 
+     SpecCodeType          SpecCode           SpecVal               Sex 
+        "logical"         "integer"         "integer"          "factor" 
+          TotalNo     CatIdentifier            NoMeas         SubFactor 
+        "numeric"         "integer"         "integer"         "numeric" 
+           SubWgt       CatCatchWgt          LngtCode         LngtClass 
+        "logical"         "integer"         "integer"         "integer" 
+       HLNoAtLngt DateofCalculation       Valid_Aphia 
+        "numeric"         "integer"         "integer" 
+
+Consistency check passed
+Processing csv file:
+[1] "/tmp/RtmpQEus22/Exchange Data_2014-12-02 13_39_50.csv"
+Locating lines with headers
+   user  system elapsed 
+  0.308   0.004   0.310 
+Reading data files
+   user  system elapsed 
+  0.020   0.000   0.016 
+   user  system elapsed 
+  0.580   0.004   0.585 
+   user  system elapsed 
+  0.440   0.004   0.445 
+Classes of the variables
+$CA
+       RecordType            Survey           Quarter           Country 
+         "factor"          "factor"         "integer"          "factor" 
+             Ship              Gear         SweepLngt           GearExp 
+         "factor"          "factor"         "integer"         "logical" 
+         DoorType              StNo            HaulNo              Year 
+         "factor"       "character"         "integer"         "integer" 
+     SpecCodeType          SpecCode          AreaType          AreaCode 
+        "logical"         "integer"         "integer"          "factor" 
+         LngtCode          LngtClas               Sex          Maturity 
+        "integer"         "integer"          "factor"         "integer" 
+           PlusGr               Age           NoAtALK            IndWgt 
+         "factor"         "integer"         "integer"         "logical" 
+DateofCalculation       Valid_Aphia 
+        "logical"         "integer" 
+
+$HH
+       RecordType            Survey           Quarter           Country 
+         "factor"          "factor"         "integer"          "factor" 
+             Ship              Gear         SweepLngt           GearExp 
+         "factor"          "factor"         "integer"          "factor" 
+         DoorType              StNo            HaulNo              Year 
+         "factor"       "character"         "integer"         "integer" 
+            month               Day          TimeShot           Stratum 
+        "integer"         "integer"         "integer"         "logical" 
+          HaulDur          DayNight          ShootLat         ShootLong 
+        "integer"          "factor"         "numeric"         "numeric" 
+          HaulLat          HaulLong           StatRec             Depth 
+        "numeric"         "numeric"          "factor"         "integer" 
+          HaulVal         HydroStNo    StdSpecRecCode    BycSpecRecCode 
+         "factor"          "factor"         "integer"         "integer" 
+         DataType        Netopening           Rigging           Tickler 
+         "factor"         "numeric"         "logical"         "logical" 
+         Distance          Warplngt           Warpdia           WarpDen 
+        "integer"         "integer"         "integer"         "logical" 
+      DoorSurface           DoorWgt        DoorSpread        WingSpread 
+        "numeric"         "integer"         "numeric"         "numeric" 
+         Buoyancy           KiteDim     WgtGroundRope            TowDir 
+        "integer"         "numeric"         "integer"         "integer" 
+      GroundSpeed        SpeedWater         SurCurDir       SurCurSpeed 
+        "numeric"         "numeric"         "integer"         "numeric" 
+        BotCurDir       BotCurSpeed           WindDir         WindSpeed 
+        "logical"         "logical"         "integer"         "integer" 
+         SwellDir       SwellHeight           SurTemp           BotTemp 
+        "integer"         "numeric"         "logical"         "logical" 
+           SurSal            BotSal       ThermoCline      ThClineDepth 
+        "logical"         "logical"         "logical"         "logical" 
+DateofCalculation 
+        "logical" 
+
+$HL
+       RecordType            Survey           Quarter           Country 
+         "factor"          "factor"         "integer"          "factor" 
+             Ship              Gear         SweepLngt           GearExp 
+         "factor"          "factor"         "integer"          "factor" 
+         DoorType              StNo            HaulNo              Year 
+         "factor"       "character"         "integer"         "integer" 
+     SpecCodeType          SpecCode           SpecVal               Sex 
+        "logical"         "integer"         "integer"          "factor" 
+          TotalNo     CatIdentifier            NoMeas         SubFactor 
+        "numeric"         "integer"         "integer"         "numeric" 
+           SubWgt       CatCatchWgt          LngtCode         LngtClass 
+        "logical"         "integer"         "integer"         "integer" 
+       HLNoAtLngt DateofCalculation       Valid_Aphia 
+        "numeric"         "logical"         "integer" 
+
+Consistency check passed
+Processing csv file:
+[1] "/tmp/RtmpQEus22/Exchange Data_2014-12-02 13_40_21.csv"
+Locating lines with headers
+   user  system elapsed 
+  0.324   0.004   0.326 
+Reading data files
+   user  system elapsed 
+  0.020   0.000   0.018 
+   user  system elapsed 
+  0.620   0.016   0.636 
+   user  system elapsed 
+  0.452   0.008   0.458 
+Classes of the variables
+$CA
+       RecordType            Survey           Quarter           Country 
+         "factor"          "factor"         "integer"          "factor" 
+             Ship              Gear         SweepLngt           GearExp 
+         "factor"          "factor"         "integer"         "logical" 
+         DoorType              StNo            HaulNo              Year 
+         "factor"       "character"         "integer"         "integer" 
+     SpecCodeType          SpecCode          AreaType          AreaCode 
+        "logical"         "integer"         "integer"          "factor" 
+         LngtCode          LngtClas               Sex          Maturity 
+        "integer"         "integer"          "factor"         "integer" 
+           PlusGr               Age           NoAtALK            IndWgt 
+         "factor"         "integer"         "integer"         "logical" 
+DateofCalculation       Valid_Aphia 
+        "logical"         "integer" 
+
+$HH
+       RecordType            Survey           Quarter           Country 
+         "factor"          "factor"         "integer"          "factor" 
+             Ship              Gear         SweepLngt           GearExp 
+         "factor"          "factor"         "integer"          "factor" 
+         DoorType              StNo            HaulNo              Year 
+         "factor"       "character"         "integer"         "integer" 
+            month               Day          TimeShot           Stratum 
+        "integer"         "integer"         "integer"         "logical" 
+          HaulDur          DayNight          ShootLat         ShootLong 
+        "integer"          "factor"         "numeric"         "numeric" 
+          HaulLat          HaulLong           StatRec             Depth 
+        "numeric"         "numeric"          "factor"         "integer" 
+          HaulVal         HydroStNo    StdSpecRecCode    BycSpecRecCode 
+         "factor"          "factor"         "integer"         "integer" 
+         DataType        Netopening           Rigging           Tickler 
+         "factor"         "numeric"         "logical"         "logical" 
+         Distance          Warplngt           Warpdia           WarpDen 
+        "integer"         "integer"         "integer"         "logical" 
+      DoorSurface           DoorWgt        DoorSpread        WingSpread 
+        "numeric"         "integer"         "numeric"         "numeric" 
+         Buoyancy           KiteDim     WgtGroundRope            TowDir 
+        "integer"         "numeric"         "integer"         "integer" 
+      GroundSpeed        SpeedWater         SurCurDir       SurCurSpeed 
+        "numeric"         "numeric"         "integer"         "numeric" 
+        BotCurDir       BotCurSpeed           WindDir         WindSpeed 
+        "logical"         "logical"         "integer"         "integer" 
+         SwellDir       SwellHeight           SurTemp           BotTemp 
+        "integer"         "numeric"         "logical"         "logical" 
+           SurSal            BotSal       ThermoCline      ThClineDepth 
+        "logical"         "logical"         "logical"         "logical" 
+DateofCalculation 
+        "logical" 
+
+$HL
+       RecordType            Survey           Quarter           Country 
+         "factor"          "factor"         "integer"          "factor" 
+             Ship              Gear         SweepLngt           GearExp 
+         "factor"          "factor"         "integer"          "factor" 
+         DoorType              StNo            HaulNo              Year 
+         "factor"       "character"         "integer"         "integer" 
+     SpecCodeType          SpecCode           SpecVal               Sex 
+        "logical"         "integer"         "integer"          "factor" 
+          TotalNo     CatIdentifier            NoMeas         SubFactor 
+        "numeric"         "integer"         "integer"         "numeric" 
+           SubWgt       CatCatchWgt          LngtCode         LngtClass 
+        "logical"         "integer"         "integer"         "integer" 
+       HLNoAtLngt DateofCalculation       Valid_Aphia 
+        "numeric"         "logical"         "integer" 
+
+Consistency check passed
+Processing csv file:
+[1] "/tmp/RtmpQEus22/Exchange Data_2014-12-02 13_40_45.csv"
+Locating lines with headers
+   user  system elapsed 
+  0.316   0.000   0.315 
+Reading data files
+   user  system elapsed 
+  0.016   0.000   0.017 
+   user  system elapsed 
+  0.624   0.012   0.634 
+   user  system elapsed 
+  0.440   0.000   0.444 
+Classes of the variables
+$CA
+       RecordType            Survey           Quarter           Country 
+         "factor"          "factor"         "integer"          "factor" 
+             Ship              Gear         SweepLngt           GearExp 
+         "factor"          "factor"         "integer"         "logical" 
+         DoorType              StNo            HaulNo              Year 
+         "factor"       "character"         "integer"         "integer" 
+     SpecCodeType          SpecCode          AreaType          AreaCode 
+        "logical"         "integer"         "integer"          "factor" 
+         LngtCode          LngtClas               Sex          Maturity 
+         "factor"         "integer"          "factor"         "integer" 
+           PlusGr               Age           NoAtALK            IndWgt 
+         "factor"         "integer"         "integer"         "numeric" 
+DateofCalculation       Valid_Aphia 
+        "integer"         "integer" 
+
+$HH
+       RecordType            Survey           Quarter           Country 
+         "factor"          "factor"         "integer"          "factor" 
+             Ship              Gear         SweepLngt           GearExp 
+         "factor"          "factor"         "integer"          "factor" 
+         DoorType              StNo            HaulNo              Year 
+         "factor"       "character"         "integer"         "integer" 
+            month               Day          TimeShot           Stratum 
+        "integer"         "integer"         "integer"         "logical" 
+          HaulDur          DayNight          ShootLat         ShootLong 
+        "integer"          "factor"         "numeric"         "numeric" 
+          HaulLat          HaulLong           StatRec             Depth 
+        "numeric"         "numeric"          "factor"         "integer" 
+          HaulVal         HydroStNo    StdSpecRecCode    BycSpecRecCode 
+         "factor"          "factor"         "integer"         "integer" 
+         DataType        Netopening           Rigging           Tickler 
+         "factor"         "numeric"         "logical"         "logical" 
+         Distance          Warplngt           Warpdia           WarpDen 
+        "integer"         "integer"         "integer"         "logical" 
+      DoorSurface           DoorWgt        DoorSpread        WingSpread 
+        "numeric"         "integer"         "numeric"         "numeric" 
+         Buoyancy           KiteDim     WgtGroundRope            TowDir 
+        "integer"         "numeric"         "integer"         "integer" 
+      GroundSpeed        SpeedWater         SurCurDir       SurCurSpeed 
+        "numeric"         "numeric"         "integer"         "numeric" 
+        BotCurDir       BotCurSpeed           WindDir         WindSpeed 
+        "logical"         "logical"         "integer"         "integer" 
+         SwellDir       SwellHeight           SurTemp           BotTemp 
+        "integer"         "numeric"         "numeric"         "logical" 
+           SurSal            BotSal       ThermoCline      ThClineDepth 
+        "logical"         "logical"         "logical"         "logical" 
+DateofCalculation 
+        "integer" 
+
+$HL
+       RecordType            Survey           Quarter           Country 
+         "factor"          "factor"         "integer"          "factor" 
+             Ship              Gear         SweepLngt           GearExp 
+         "factor"          "factor"         "integer"          "factor" 
+         DoorType              StNo            HaulNo              Year 
+         "factor"       "character"         "integer"         "integer" 
+     SpecCodeType          SpecCode           SpecVal               Sex 
+        "logical"         "integer"         "integer"          "factor" 
+          TotalNo     CatIdentifier            NoMeas         SubFactor 
+        "numeric"         "integer"         "integer"         "numeric" 
+           SubWgt       CatCatchWgt          LngtCode         LngtClass 
+        "logical"         "integer"         "integer"         "integer" 
+       HLNoAtLngt DateofCalculation       Valid_Aphia 
+        "numeric"         "integer"         "integer" 
+
+Consistency check passed
+Processing csv file:
+[1] "/tmp/RtmpQEus22/Exchange Data_2014-12-02 13_41_19.csv"
+Locating lines with headers
+   user  system elapsed 
+  0.340   0.000   0.341 
+Reading data files
+   user  system elapsed 
+   0.02    0.00    0.02 
+   user  system elapsed 
+  0.672   0.016   0.685 
+   user  system elapsed 
+  0.548   0.000   0.550 
+Classes of the variables
+$CA
+       RecordType            Survey           Quarter           Country 
+         "factor"          "factor"         "integer"          "factor" 
+             Ship              Gear         SweepLngt           GearExp 
+         "factor"          "factor"         "integer"         "logical" 
+         DoorType              StNo            HaulNo              Year 
+         "factor"       "character"         "integer"         "integer" 
+     SpecCodeType          SpecCode          AreaType          AreaCode 
+        "logical"         "integer"         "integer"          "factor" 
+         LngtCode          LngtClas               Sex          Maturity 
+         "factor"         "integer"          "factor"         "integer" 
+           PlusGr               Age           NoAtALK            IndWgt 
+         "factor"         "integer"         "integer"         "numeric" 
+DateofCalculation       Valid_Aphia 
+        "integer"         "integer" 
+
+$HH
+       RecordType            Survey           Quarter           Country 
+         "factor"          "factor"         "integer"          "factor" 
+             Ship              Gear         SweepLngt           GearExp 
+         "factor"          "factor"         "integer"          "factor" 
+         DoorType              StNo            HaulNo              Year 
+         "factor"       "character"         "integer"         "integer" 
+            month               Day          TimeShot           Stratum 
+        "integer"         "integer"         "integer"         "logical" 
+          HaulDur          DayNight          ShootLat         ShootLong 
+        "integer"          "factor"         "numeric"         "numeric" 
+          HaulLat          HaulLong           StatRec             Depth 
+        "numeric"         "numeric"          "factor"         "integer" 
+          HaulVal         HydroStNo    StdSpecRecCode    BycSpecRecCode 
+         "factor"          "factor"         "integer"         "integer" 
+         DataType        Netopening           Rigging           Tickler 
+         "factor"         "numeric"         "logical"         "logical" 
+         Distance          Warplngt           Warpdia           WarpDen 
+        "integer"         "integer"         "integer"         "logical" 
+      DoorSurface           DoorWgt        DoorSpread        WingSpread 
+        "numeric"         "integer"         "numeric"         "numeric" 
+         Buoyancy           KiteDim     WgtGroundRope            TowDir 
+        "integer"         "numeric"         "integer"         "integer" 
+      GroundSpeed        SpeedWater         SurCurDir       SurCurSpeed 
+        "numeric"         "numeric"         "integer"         "numeric" 
+        BotCurDir       BotCurSpeed           WindDir         WindSpeed 
+        "logical"         "logical"         "integer"         "integer" 
+         SwellDir       SwellHeight           SurTemp           BotTemp 
+        "integer"         "numeric"         "numeric"         "logical" 
+           SurSal            BotSal       ThermoCline      ThClineDepth 
+        "logical"         "logical"         "logical"         "logical" 
+DateofCalculation 
+        "integer" 
+
+$HL
+       RecordType            Survey           Quarter           Country 
+         "factor"          "factor"         "integer"          "factor" 
+             Ship              Gear         SweepLngt           GearExp 
+         "factor"          "factor"         "integer"          "factor" 
+         DoorType              StNo            HaulNo              Year 
+         "factor"       "character"         "integer"         "integer" 
+     SpecCodeType          SpecCode           SpecVal               Sex 
+        "logical"         "integer"         "integer"          "factor" 
+          TotalNo     CatIdentifier            NoMeas         SubFactor 
+        "numeric"         "integer"         "integer"         "numeric" 
+           SubWgt       CatCatchWgt          LngtCode         LngtClass 
+        "logical"         "integer"         "integer"         "integer" 
+       HLNoAtLngt DateofCalculation       Valid_Aphia 
+        "numeric"         "integer"         "integer" 
+
+Consistency check passed
+Processing csv file:
+[1] "/tmp/RtmpQEus22/Exchange Data_2014-12-02 13_42_02.csv"
+Locating lines with headers
+   user  system elapsed 
+  0.328   0.000   0.327 
+Reading data files
+   user  system elapsed 
+  0.020   0.000   0.019 
+   user  system elapsed 
+  0.640   0.016   0.653 
+   user  system elapsed 
+  0.488   0.000   0.486 
+Classes of the variables
+$CA
+       RecordType            Survey           Quarter           Country 
+         "factor"          "factor"         "integer"          "factor" 
+             Ship              Gear         SweepLngt           GearExp 
+         "factor"          "factor"         "integer"          "factor" 
+         DoorType              StNo            HaulNo              Year 
+         "factor"       "character"         "integer"         "integer" 
+     SpecCodeType          SpecCode          AreaType          AreaCode 
+         "factor"         "integer"         "integer"          "factor" 
+         LngtCode          LngtClas               Sex          Maturity 
+         "factor"         "integer"          "factor"         "integer" 
+           PlusGr               Age           NoAtALK            IndWgt 
+         "factor"         "integer"         "integer"         "numeric" 
+DateofCalculation       Valid_Aphia 
+        "integer"         "integer" 
+
+$HH
+       RecordType            Survey           Quarter           Country 
+         "factor"          "factor"         "integer"          "factor" 
+             Ship              Gear         SweepLngt           GearExp 
+         "factor"          "factor"         "integer"          "factor" 
+         DoorType              StNo            HaulNo              Year 
+         "factor"       "character"         "integer"         "integer" 
+            month               Day          TimeShot           Stratum 
+        "integer"         "integer"         "integer"         "logical" 
+          HaulDur          DayNight          ShootLat         ShootLong 
+        "integer"          "factor"         "numeric"         "numeric" 
+          HaulLat          HaulLong           StatRec             Depth 
+        "numeric"         "numeric"          "factor"         "integer" 
+          HaulVal         HydroStNo    StdSpecRecCode    BycSpecRecCode 
+         "factor"          "factor"         "integer"         "integer" 
+         DataType        Netopening           Rigging           Tickler 
+         "factor"         "numeric"         "logical"         "logical" 
+         Distance          Warplngt           Warpdia           WarpDen 
+        "integer"         "integer"         "integer"         "logical" 
+      DoorSurface           DoorWgt        DoorSpread        WingSpread 
+        "numeric"         "integer"         "numeric"         "numeric" 
+         Buoyancy           KiteDim     WgtGroundRope            TowDir 
+        "integer"         "numeric"         "integer"         "integer" 
+      GroundSpeed        SpeedWater         SurCurDir       SurCurSpeed 
+        "numeric"         "numeric"         "integer"         "numeric" 
+        BotCurDir       BotCurSpeed           WindDir         WindSpeed 
+        "logical"         "logical"         "integer"         "integer" 
+         SwellDir       SwellHeight           SurTemp           BotTemp 
+        "integer"         "numeric"         "numeric"         "numeric" 
+           SurSal            BotSal       ThermoCline      ThClineDepth 
+        "numeric"         "numeric"         "logical"         "logical" 
+DateofCalculation 
+        "integer" 
+
+$HL
+       RecordType            Survey           Quarter           Country 
+         "factor"          "factor"         "integer"          "factor" 
+             Ship              Gear         SweepLngt           GearExp 
+         "factor"          "factor"         "integer"          "factor" 
+         DoorType              StNo            HaulNo              Year 
+         "factor"       "character"         "integer"         "integer" 
+     SpecCodeType          SpecCode           SpecVal               Sex 
+         "factor"         "integer"         "integer"          "factor" 
+          TotalNo     CatIdentifier            NoMeas         SubFactor 
+        "numeric"         "integer"         "integer"         "numeric" 
+           SubWgt       CatCatchWgt          LngtCode         LngtClass 
+        "integer"         "integer"          "factor"         "integer" 
+       HLNoAtLngt DateofCalculation       Valid_Aphia 
+        "numeric"         "integer"         "integer" 
+
+Consistency check passed
+Processing csv file:
+[1] "/tmp/RtmpQEus22/Exchange Data_2014-12-02 13_42_20.csv"
+Locating lines with headers
+   user  system elapsed 
+  0.328   0.000   0.326 
+Reading data files
+   user  system elapsed 
+  0.016   0.000   0.017 
+   user  system elapsed 
+  0.596   0.008   0.604 
+   user  system elapsed 
+  0.492   0.004   0.494 
+Classes of the variables
+$CA
+       RecordType            Survey           Quarter           Country 
+         "factor"          "factor"         "integer"          "factor" 
+             Ship              Gear         SweepLngt           GearExp 
+         "factor"          "factor"         "integer"          "factor" 
+         DoorType              StNo            HaulNo              Year 
+         "factor"       "character"         "integer"         "integer" 
+     SpecCodeType          SpecCode          AreaType          AreaCode 
+         "factor"         "integer"         "integer"          "factor" 
+         LngtCode          LngtClas               Sex          Maturity 
+         "factor"         "integer"          "factor"         "integer" 
+           PlusGr               Age           NoAtALK            IndWgt 
+         "factor"         "integer"         "integer"         "numeric" 
+DateofCalculation       Valid_Aphia 
+        "integer"         "integer" 
+
+$HH
+       RecordType            Survey           Quarter           Country 
+         "factor"          "factor"         "integer"          "factor" 
+             Ship              Gear         SweepLngt           GearExp 
+         "factor"          "factor"         "integer"          "factor" 
+         DoorType              StNo            HaulNo              Year 
+         "factor"       "character"         "integer"         "integer" 
+            month               Day          TimeShot           Stratum 
+        "integer"         "integer"         "integer"         "logical" 
+          HaulDur          DayNight          ShootLat         ShootLong 
+        "integer"          "factor"         "numeric"         "numeric" 
+          HaulLat          HaulLong           StatRec             Depth 
+        "numeric"         "numeric"          "factor"         "integer" 
+          HaulVal         HydroStNo    StdSpecRecCode    BycSpecRecCode 
+         "factor"          "factor"         "integer"         "integer" 
+         DataType        Netopening           Rigging           Tickler 
+         "factor"         "numeric"         "logical"         "logical" 
+         Distance          Warplngt           Warpdia           WarpDen 
+        "integer"         "integer"         "integer"         "integer" 
+      DoorSurface           DoorWgt        DoorSpread        WingSpread 
+        "numeric"         "integer"         "numeric"         "numeric" 
+         Buoyancy           KiteDim     WgtGroundRope            TowDir 
+        "integer"         "numeric"         "integer"         "integer" 
+      GroundSpeed        SpeedWater         SurCurDir       SurCurSpeed 
+        "numeric"         "numeric"         "integer"         "numeric" 
+        BotCurDir       BotCurSpeed           WindDir         WindSpeed 
+        "logical"         "logical"         "integer"         "integer" 
+         SwellDir       SwellHeight           SurTemp           BotTemp 
+        "integer"         "numeric"         "numeric"         "numeric" 
+           SurSal            BotSal       ThermoCline      ThClineDepth 
+        "numeric"         "numeric"         "logical"         "logical" 
+DateofCalculation 
+        "integer" 
+
+$HL
+       RecordType            Survey           Quarter           Country 
+         "factor"          "factor"         "integer"          "factor" 
+             Ship              Gear         SweepLngt           GearExp 
+         "factor"          "factor"         "integer"          "factor" 
+         DoorType              StNo            HaulNo              Year 
+         "factor"       "character"         "integer"         "integer" 
+     SpecCodeType          SpecCode           SpecVal               Sex 
+         "factor"         "integer"         "integer"          "factor" 
+          TotalNo     CatIdentifier            NoMeas         SubFactor 
+        "numeric"         "integer"         "integer"         "numeric" 
+           SubWgt       CatCatchWgt          LngtCode         LngtClass 
+        "integer"         "integer"          "factor"         "integer" 
+       HLNoAtLngt DateofCalculation       Valid_Aphia 
+        "numeric"         "integer"         "integer" 
+
+Consistency check passed
+Processing csv file:
+[1] "/tmp/RtmpQEus22/Exchange Data_2014-12-02 13_42_44.csv"
+Locating lines with headers
+   user  system elapsed 
+  0.316   0.004   0.322 
+Reading data files
+   user  system elapsed 
+  0.016   0.000   0.019 
+   user  system elapsed 
+  0.632   0.000   0.631 
+   user  system elapsed 
+  0.500   0.000   0.499 
+Classes of the variables
+$CA
+       RecordType            Survey           Quarter           Country 
+         "factor"          "factor"         "integer"          "factor" 
+             Ship              Gear         SweepLngt           GearExp 
+         "factor"          "factor"         "integer"          "factor" 
+         DoorType              StNo            HaulNo              Year 
+         "factor"       "character"         "integer"         "integer" 
+     SpecCodeType          SpecCode          AreaType          AreaCode 
+         "factor"         "integer"         "integer"          "factor" 
+         LngtCode          LngtClas               Sex          Maturity 
+         "factor"         "integer"          "factor"         "integer" 
+           PlusGr               Age           NoAtALK            IndWgt 
+         "factor"         "integer"         "integer"         "numeric" 
+DateofCalculation       Valid_Aphia 
+        "integer"         "integer" 
+
+$HH
+       RecordType            Survey           Quarter           Country 
+         "factor"          "factor"         "integer"          "factor" 
+             Ship              Gear         SweepLngt           GearExp 
+         "factor"          "factor"         "integer"          "factor" 
+         DoorType              StNo            HaulNo              Year 
+         "factor"       "character"         "integer"         "integer" 
+            month               Day          TimeShot           Stratum 
+        "integer"         "integer"         "integer"         "logical" 
+          HaulDur          DayNight          ShootLat         ShootLong 
+        "integer"          "factor"         "numeric"         "numeric" 
+          HaulLat          HaulLong           StatRec             Depth 
+        "numeric"         "numeric"          "factor"         "integer" 
+          HaulVal         HydroStNo    StdSpecRecCode    BycSpecRecCode 
+         "factor"          "factor"         "integer"         "integer" 
+         DataType        Netopening           Rigging           Tickler 
+         "factor"         "numeric"         "logical"         "logical" 
+         Distance          Warplngt           Warpdia           WarpDen 
+        "integer"         "integer"         "integer"         "integer" 
+      DoorSurface           DoorWgt        DoorSpread        WingSpread 
+        "numeric"         "integer"         "numeric"         "numeric" 
+         Buoyancy           KiteDim     WgtGroundRope            TowDir 
+        "integer"         "numeric"         "integer"         "integer" 
+      GroundSpeed        SpeedWater         SurCurDir       SurCurSpeed 
+        "numeric"         "numeric"         "integer"         "numeric" 
+        BotCurDir       BotCurSpeed           WindDir         WindSpeed 
+        "logical"         "logical"         "integer"         "integer" 
+         SwellDir       SwellHeight           SurTemp           BotTemp 
+        "integer"         "numeric"         "numeric"         "numeric" 
+           SurSal            BotSal       ThermoCline      ThClineDepth 
+        "numeric"         "numeric"         "logical"         "logical" 
+DateofCalculation 
+        "integer" 
+
+$HL
+       RecordType            Survey           Quarter           Country 
+         "factor"          "factor"         "integer"          "factor" 
+             Ship              Gear         SweepLngt           GearExp 
+         "factor"          "factor"         "integer"          "factor" 
+         DoorType              StNo            HaulNo              Year 
+         "factor"       "character"         "integer"         "integer" 
+     SpecCodeType          SpecCode           SpecVal               Sex 
+         "factor"         "integer"         "integer"          "factor" 
+          TotalNo     CatIdentifier            NoMeas         SubFactor 
+        "numeric"         "integer"         "integer"         "numeric" 
+           SubWgt       CatCatchWgt          LngtCode         LngtClass 
+        "integer"         "integer"          "factor"         "integer" 
+       HLNoAtLngt DateofCalculation       Valid_Aphia 
+        "numeric"         "integer"         "integer" 
+
+Consistency check passed
+> cod <- subset(d,Species == 'Gadus morhua')
+> 
+> # Retrieve length data
+> codL <- merge(cod[['HL']],cod[['HH']][c('haul.id','lat','lon')])
+> codL$areacell <- icesSquare(codL)
+> codL$Species <- 'COD'
+> 
+> # Retrieve age data
+> codA <- merge(cod[['CA']],cod[['HH']][c('haul.id','lat','lon')])
+> codA$areacell <- as.character(codA$AreaCode)
+> codA$Species <- 'COD'
+> 
+> # Create connection to MFDB database, as the Baltic case study
+> mdb <- mfdb('Baltic')
+> 
+> # Assume all squares are 5km^2
+> squares <- unique(c(codA$areacell,codL$areacell))
+> mfdb_import_area(mdb, data.frame(
++     id = 1:length(squares),
++     name = squares,
++     size = c(5)))
+> 
+> # Create divisions and import those
+> sub.split <- llply(squares, function(x) x)                           
+> names(sub.split) <- squares
+> mfdb_import_division(mdb, sub.split)
+> 
+> # Hard-code temperature data (TODO: Find proper source)
+> mfdb_import_temperature(mdb, data.frame(
++     year = 1996:2005,
++     month = 1,
++     areacell = squares[1],
++     temperature = 7.4))
+> 
+> # Set-up some sampling types
+> mfdb_import_sampling_type(mdb, data.frame(
++     id = 1,
++     name = 'RES',
++     description = 'Research'))
+> 
+> # Import cod length data as a survey
+> tmp <- codL[c('Year','Quarter','areacell','Species','Sex','LngtCm','Count')]
+> names(tmp) <- c('year','month','areacell','species','sex','length','count')
+> tmp <- subset(tmp,!is.na(length))
+> tmp$count <- round(tmp$count)
+> tmp$sampling_type <- 'RES'
+> mfdb_import_survey(mdb,
++                    data_source = 'example-datras-codL',
++                    tmp)
+> 
+> # Import cod age data as a separate survey
+> tmp <- codA[c('Year','Quarter','areacell','Species','Sex','Age','LngtCm')]
+> names(tmp) <- c('year','month','areacell','species','sex','age','length')
+> tmp <- subset(tmp,!is.na(age))
+> tmp$sampling_type <- 'RES'
+> mfdb_import_survey(mdb,
++                    data_source = 'example-datras-codA',
++                    tmp)
+> 
+> # Create a gadget directory, define some defaults to use with our queries below
+> gd <- gadget_directory("example-datras-model")
+> defaults <- list(
++     area = mfdb_group("101" = squares),
++     timestep = mfdb_timestep_quarterly, # Group months to create 2 timesteps for each year
++     year = 1996:2005)
+> 
+> # Write out areafile and update mainfile with areafile location
+> gadget_dir_write(gd,gadget_areafile(
++     size = mfdb_area_size(mdb, defaults)[[1]],
++     temperature = mfdb_temperature(mdb, defaults)[[1]]))
+> 
+> # Write a penalty component to the likelihood file
+> gadget_dir_write(gd, gadget_likelihood_component("penalty",
++                                                  name = "bounds",
++                                                  weight = "0.5",
++                                                  data = data.frame(
++                                                    switch = c("default"),
++                                                    power = c(2),
++                                                    stringsAsFactors = FALSE)))
+> 
+> # Query some age-length data and write it as a catchdistribution component
+> aggdata <- mfdb_sample_count(mdb, c('age', 'length'), c(list(
++     age = mfdb_group_numbered('age',1,2,3,4,5,6,7,8,9,10,11,12,13),
++     sampling_type = 'RES',
++     length = mfdb_interval("len", seq(0, 150, by = 2))),
++     defaults))
+> gadget_dir_write(gd, gadget_likelihood_component("catchdistribution",
++                                                  name = "aldist.datras",
++                                                  weight = 1,
++                                                  data = aggdata[[1]],
++                                                  fleetnames = c("datras"),
++                                                  stocknames = 'cod'))
+> rm(aggdata)
+> 
+> # Query some length data and write a separate component (note different name)
+> aggdata <- mfdb_sample_count(mdb, c('age', 'length'), c(list(
++     sampling_type = 'RES',
++     length = mfdb_interval("len", seq(0, 150, by = 2))),
++     defaults))
+> gadget_dir_write(gd, gadget_likelihood_component("catchdistribution",
++                                                  name = "ldist.datras",
++                                                  weight = 1,
++                                                  data = aggdata[[1]],
++                                                  fleetnames = c("datras"),
++                                                  stocknames = 'cod'))
+> rm(aggdata)
+> 

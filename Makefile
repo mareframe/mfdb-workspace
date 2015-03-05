@@ -52,6 +52,18 @@ test: install
 inttest: test
 	for f in */demo/inttest-*.R; do echo "=== $$f ============="; Rscript $$f || break; done
 
+example-iceland: install
+	rm -r example-iceland-model || true
+	mkdir example-iceland-model
+	R_LIBS=$(shell pwd)/Rpackages time R --vanilla < mfdb/demo/example-iceland.R > example-iceland-model/stdout
+	git diff --no-index --color-words example-iceland-model.baseline example-iceland-model
+
+example-datras: install
+	rm -r example-datras-model || true
+	mkdir example-datras-model
+	R_LIBS=$(shell pwd)/Rpackages time R --vanilla < mfdb/demo/example-datras.R > example-datras-model/stdout
+	git diff --no-index --color-words example-datras-model.baseline example-datras-model
+
 shell: install
 	R_DEVPKG=mfdb R_LIBS=$(shell pwd)/Rpackages R --no-save --no-environ
 
