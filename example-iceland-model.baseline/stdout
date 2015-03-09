@@ -149,7 +149,7 @@ Type 'q()' to quit R.
 > 
 > proc.time()
    user  system elapsed 
- 25.956   1.060  78.155 
+ 26.188   0.940  79.255 
 > 
 > # Stomach data
 > 
@@ -223,5 +223,5 @@ Type 'q()' to quit R.
 > 
 > proc.time()
    user  system elapsed 
- 71.084   1.084 137.406 
+ 29.888   0.956  88.196 
 > 
