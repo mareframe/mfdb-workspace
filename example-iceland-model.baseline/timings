@@ -1,2 +1,3 @@
 0390a4d Use mfdb_bulk_copy for importing predator data  (HEAD) 25.39 user 1.01 system 2:17.45 elapsed 19% CPU
 0b9d36a readExchangeDir is noisy, hush it (HEAD, wip-reuse-temp-tables) 30.76 user 1.05 system 1:39.04 elapsed 32% CPU
+50ae90b Should use name to compare new/old items in taxonomies, not id (HEAD, 2.x) 71.09 user 1.16 system 2:17.50 elapsed 52% CPU

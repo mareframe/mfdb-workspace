@@ -35,3 +35,16 @@ ageaggfile	Aggfiles/catchdistribution.ldist.comm.age.agg
 lenaggfile	Aggfiles/catchdistribution.ldist.comm.len.agg
 fleetnames	comm
 stocknames	codimm	codmat
+; 
+[component]
+name	stomachcontent
+weight	0
+type	stomachcontent
+function	scsimple
+datafile	Data/stomachcontent.stomachcontent.scsimple
+epsilon	10
+areaaggfile	Aggfiles/stomachcontent.stomachcontent.area.agg
+predatornames	cod
+predatorlengths	
+lenaggfile	Aggfiles/stomachcontent.stomachcontent.len.agg
+preyaggfile	Aggfiles/stomachcontent.stomachcontent.prey.agg
