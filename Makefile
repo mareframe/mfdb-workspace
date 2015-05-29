@@ -69,6 +69,9 @@ shell: install
 
 documentation: install
 	cp -vr Rpackages/mfdb mareframe.github.io/packages/
+	echo "<html><body><h1>Demos</h1><hr/><ul>" > mareframe.github.io/packages/mfdb/demo/index.html
+	ls -1 mareframe.github.io/packages/mfdb/demo/ | awk '{ print "<ul><a href=\"" $$1 "\">" $$1 "</a></ul>"; }' >> mareframe.github.io/packages/mfdb/demo/index.html
+	echo "</ul></body></html>" >> mareframe.github.io/packages/mfdb/demo/index.html
 	cd mareframe.github.io && git add -A && git commit -av
 
 # Individual R files require no comilation
