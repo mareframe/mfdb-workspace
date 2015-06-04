@@ -2,7 +2,7 @@
 ; 101
 areas	1
 size	915
-temperature	
+temperature
 ; -- data --
 ; year	step	area	mean
 1996	1	1	7.4
