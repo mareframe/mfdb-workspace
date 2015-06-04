@@ -1,6 +1,6 @@
 
-R version 3.1.2 (2014-10-31) -- "Pumpkin Helmet"
-Copyright (C) 2014 The R Foundation for Statistical Computing
+R version 3.2.0 (2015-04-16) -- "Full of Ingredients"
+Copyright (C) 2015 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -149,7 +149,7 @@ Type 'q()' to quit R.
 > 
 > proc.time()
    user  system elapsed 
- 26.188   0.940  79.255 
+ 18.120   1.148  69.977 
 > 
 > # Stomach data
 > 
@@ -223,5 +223,5 @@ Type 'q()' to quit R.
 > 
 > proc.time()
    user  system elapsed 
- 29.888   0.956  88.196 
+ 21.040   1.156  78.224 
 > 

@@ -1,3 +1,4 @@
 5c6654a No useful return value here, hide it (HEAD, wip-reuse-temp-tables) 42.22 user 0.44 system 1:02.00 elapsed 68% CPU
 0b9d36a readExchangeDir is noisy, hush it (HEAD, wip-reuse-temp-tables) 41.29 user 0.50 system 1:02.01 elapsed 67% CPU
 beb58de Bulk-load prey data, speeding up stomach import (HEAD, 2.x) 42.04 user 0.47 system 0:57.10 elapsed 74% CPU
+c471467 Note about lazy-load woes (HEAD, origin/3.x, 3.x) 36.46 user 0.50 system 0:49.09 elapsed 75% CPU
